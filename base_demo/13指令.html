@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指令</title>
+    <style>
+        [v-clock] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <p ref="content">baidu.com</p>
+        <button @click="hint">提示</button>
+        <p>{{msg}}</p>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#demo",
+            data: {
+                msg: "YK菌"
+            },
+            methods: {
+                hint(){
+                    alert(this.$refs.content.textContent);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

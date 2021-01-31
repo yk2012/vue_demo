@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插件</title>
+</head>
+<body>
+    <div id="test">
+        <p v-my-directive="msg"></p>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script src="./15Vue-myPlugin.js"></script>
+    <script>
+        //声明使用插件
+        Vue.use(MyPlugin); // 内部会执行MyPlugin.install(Vue)
+        Vue.myGlobalMethod();
+        
+        const vm = new Vue({
+            el: "#test",
+            data: {
+                msg: "Hello, YK~"
+            }
+        });
+        
+        vm.$myMethod();
+
+    </script>
+</body>
+</html>
