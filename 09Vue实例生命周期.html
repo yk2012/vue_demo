@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue实例生命周期</title>
+</head>
+<body>
+    <div id="demo">
+        <button @click="destoryVM">destroy vm</button>
+        <p v-show="isShow">YK菌学前端</p>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#demo",
+            data:{
+                isShow: true,
+            },
+
+            // 1. 初始化阶段
+            beforeCreate(){
+                console.log('beforeCreate()');
+            },
+            created(){
+                console.log('created()');
+            },
+           
+            beforeMount(){
+                console.log('beforeMount()');
+            },
+            mounted(){ // 初始化显示之后立即调用（1次）
+                console.log('mounted()');
+                this.intervalId = setInterval(() => { // 将函数进行参数传递，最好用箭头函数，因为它函数内部没有this，直接用外面的this
+                    this.isShow = !this.isShow;
+                }, 1000)
+
+            },
+
+            // 2. 更新阶段
+            beforeUpdate(){
+                console.log('beforeUpdate()');
+            },
+            updated(){
+                console.log('updated()');
+            },
+
+            // 3. 死亡阶段
+            beforeDestroy(){ // 死亡之前调用（1次）
+                console.log('beforeDestroy()');
+                clearInterval(this.intervalId);//清除定时器
+            },
+            destroyed(){
+                console.log('destroyed()');
+            },
+
+            methods:{
+                destoryVM(){
+                    this.$destroy();// 内存泄漏，定时器还没有清除
+                }
+            },
+        })
+    </script>
+</body>
+</html>

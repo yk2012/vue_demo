@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理</title>
+</head>
+<body>
+    <div id="demo">
+
+        <h1>1. 绑定监听</h1>
+        <button @click="test1">test1</button>
+        <button @click="test2('abc')">test2</button>
+        <button @click="test3">test3</button>
+        <button @click="test4(123, $event)">test4</button>
+
+    
+        <h1>2. 事件修饰符</h1>
+
+        <h3> 停止事件冒泡 </h3>
+        <div style="width: 200px; height: 200px; background: red;" @click="test5">
+            <div style="width: 100px; height: 100px; background: blue;" @click.stop="test6"></div>
+        </div>
+        
+        <h3> 阻止事件默认行为 </h3>
+        <a href="http://www.baidu.com" @click.prevent="test7">去百度首页</a>
+    
+        <h1>3. 按键修饰符</h1>
+        <input type="text" @keyup.13="test8">
+        <input type="text" @keyup.enter="test8">
+
+
+    </div>
+
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+        new Vue({
+            el: "#demo",
+            data: {},
+            methods: {
+                test1(){
+                    alert("hahah");
+                },
+                test2(msg){
+                    alert(msg);
+                },
+                test3(event){
+                    alert(event.target.innerHTML);
+                },
+                test4(number, event){
+                    alert(number + '---' + event.target.innerHTML);
+                },
+                test5(){
+                    alert('out');
+                },
+                test6(){
+                    // event.stopPropagation(); // 停止事件冒泡 原来的做法
+                    alert('inner');
+                },
+                test7(){
+                    // event.preventDefault(); // 阻止事件默认行为 原来的做法
+                    alert("2222");
+                },
+                test8(event){
+                    // if(event.keyCode===13){ // 原来的做法
+                    //     alert(event.target.value);
+                    // }
+                    alert(event.target.value);
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+</head>
+<body>
+    <div id="demo">
+        <h2>显示格式化的日期时间</h2>
+        <p>{{date}}</p> 
+        <p>完整版：{{date | dateString}}</p>
+        <p>年月日：{{date | dateString('YYYY-MM-DD')}}</p>
+        <p>时分秒：{{date | dateString('HH:mm:ss')}}</p>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/moment.js"></script>
+    <script>
+        Vue.filter('dateString', function(value, format='YYYY-MM-DD HH:mm:ss'){
+            return moment(value).format(format);
+        });
+
+        new Vue({
+            el: '#demo',
+            data: {
+                date: new Date()
+            }
+        })
+
+
+    </script>
+</body>
+</html>

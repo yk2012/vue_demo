@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue过渡</title>
+    <style>
+        /* 显示/隐藏的过渡效果 */
+        .xxx-enter-active, .xxx-leave-active{
+            transition: opacity 0.5s;
+        }
+        /* 隐藏时的样式  */
+        .xxx-enter, .xxx-leave-to{
+            opacity: 0;
+        }
+
+        .move-enter-active {
+            transition: all 1s;
+        }
+        .move-leave-active {
+            transition: all 3s;
+        }
+        .move-enter, .move-leave-to {
+            opacity: 0;
+            transition: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+    <div id="demo1">
+        <button @click="isShow=!isShow">过渡1</button>
+        <transition name="xxx">
+            <p v-show="isShow">YK菌学前端</p>
+        </transition>   
+    </div>
+
+    <div id="demo2">
+        <button @click="isShow=!isShow">过渡2</button>
+        <transition name="move">
+            <p v-show="isShow">YK菌天天学前端</p>
+        </transition>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>  
+        new Vue({
+            el: "#demo1",
+            data() {
+                return {
+                    isShow: true
+                }
+            }
+        })
+
+        new Vue({
+            el: "#demo2",
+            data: {
+                isShow:true
+            }
+        })
+
+    </script>
+</body>
+</html>
